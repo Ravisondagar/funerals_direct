@@ -1,5 +1,11 @@
 @extends('user.layouts.app')
 @section('content')
+@if(Session::has('success'))
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <p><i class="icon fa fa-check"></i> success! {{ Session::get('success') }}</p>        
+    </div>
+@endif
 	<div class="landing-page-search-bg">
 		<img src="{!! asset('project/images/bg-img.jpg') !!}" alt="">
 		<div class="most-affordable-wrap">

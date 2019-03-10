@@ -21,7 +21,7 @@ class CreateBlogsTable extends Migration
             $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
             $table->string('title');
             $table->string('slug');
-            $table->string('discription')->nullable();
+            $table->string('description')->nullable();
             $table->string('image')->nullable();
             $table->tinyInteger('is_archive')->defult(0);
             $table->tinyInteger('publish')->defult(0);

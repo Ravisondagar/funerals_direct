@@ -17,12 +17,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('setting','UsersController@setting')->name('users.setting');
 
 
-Route::get('/dasbord', function () {
+Route::get('/dashboard', function () {
     return view('index2');
-});
+})->name('dashboard');
 
 Route::resource('users','UsersController');
 Route::get('user-register','UsersController@register')->name('users.register');

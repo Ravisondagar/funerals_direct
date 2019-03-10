@@ -14,6 +14,7 @@
 			@endif
 			<div class="login-form">
 				<form action="{!! route('users.post_register') !!}" method="post">
+					@csrf
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="First Name" name="name">
 					</div>
@@ -24,10 +25,10 @@
 						<input type="email" name="email" class="form-control" placeholder="Email Address">
 					</div>
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Password" name="password">
+						<input type="password" class="form-control" placeholder="Password" name="password">
 					</div>
 					<div class="input-group">
-						<input type="text" name="password_confirmation" class="form-control" placeholder="Confirm Password">
+						<input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password">
 					</div>
 					<div class="input-group">
 						<div class="captcha">
