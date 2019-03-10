@@ -10,7 +10,7 @@
 					</div>
 				</div>
 				<div class="container clearfix">
-					<div class="left"><a href="#"><img src="{!! asset('public/images/facebook-icon.png') !!}" alt=""></a></div>
+					<div class="left"><a href="#"><img src="{!! asset('/project/images/facebook-icon.png') !!}" alt=""></a></div>
 					<div class="right">
 						<form>
 							<ul class="clearfix">
@@ -26,7 +26,7 @@
 			<div class="container clearfix">
 				<div class="header-wrap-left clearfix">
 					<div class="logo">
-						<a href="#"><img src="{!! asset('public/images/logo.png') !!}" alt=""></a>
+						<a href="#"><img src="{!! asset('project/images/logo.png') !!}" alt=""></a>
 					</div>
 					<button data-target="#nav-header" data-toggle="collapse" class="navbar-toggle" type="button">
 						<span class="icon-bar"></span>

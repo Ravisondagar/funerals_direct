@@ -27,3 +27,5 @@ Route::get('/dasbord', function () {
 Route::resource('users','UsersController');
 Route::get('user-register','UsersController@register')->name('users.register');
 Route::post('user-post-register','UsersController@post_register')->name('users.post_register');
+
+Route::get('/home', 'HomeController@index')->name('home');
