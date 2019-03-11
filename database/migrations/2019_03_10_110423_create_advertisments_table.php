@@ -13,7 +13,7 @@ class CreateAdvertismentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('advertisments', function (Blueprint $table) {
+        Schema::create('advertisements', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('text');
             $table->string('link');
@@ -30,6 +30,6 @@ class CreateAdvertismentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('advertisments');
+        Schema::dropIfExists('advertisements');
     }
 }

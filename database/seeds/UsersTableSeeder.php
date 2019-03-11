@@ -21,5 +21,15 @@ class UsersTableSeeder extends Seeder
             'created_at' => '2018-07-16 05:48:24',
             'updated_at' => '2018-07-16 05:48:24',
         ]);
+        DB::table('users')->insert([
+            'name' => 'Hari',
+            'lname' => 'Patel',
+            'email' => 'hari@gmail.com',
+            'role' => 'member',
+            'password' => Hash::make('123'),
+            'active' => '1',
+            'created_at' => '2018-07-16 05:48:24',
+            'updated_at' => '2018-07-16 05:48:24',
+        ]);
     }
 }

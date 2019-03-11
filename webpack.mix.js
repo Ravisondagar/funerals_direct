@@ -19,6 +19,12 @@ const mix = require('laravel-mix');
  'public/project/css/flatpickr.css',
  'public/project/css/style.css',
  'public/project/css/media.css',
+ 'public/bower_components/bootstrap/dist/css/bootstrap.min.css',
+ 'public/bower_components/font-awesome/css/font-awesome.min.css',
+ 'public/bower_components/Ionicons/css/ionicons.min.css',
+ 'public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css',
+ 'public/dist/css/AdminLTE.min.css',
+ 'public/dist/css/skins/_all-skins.min.css',
  ], 'public/css/main.css');
 
  mix.scripts([
@@ -31,4 +37,10 @@ const mix = require('laravel-mix');
  'public/project/js/flatpickr.js',
  'public/project/js/jquery.raty.js',
  'public/project/js/setting.js',
+ 'public/bower_components/datatables.net/js/jquery.dataTables.min.js',
+ 'public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js',
+ 'public/bower_components/jquery-slimscroll/jquery.slimscroll.min.js',
+ 'public/bower_components/fastclick/lib/fastclick.js',
+ 'public/dist/js/adminlte.min.js',
+ 'public/dist/js/demo.js',
  ], 'public/js/main.js');

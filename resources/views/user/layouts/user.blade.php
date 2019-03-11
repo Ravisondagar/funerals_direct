@@ -7,6 +7,9 @@
 	<link rel="stylesheet" type="text/css" href="{!! asset('css/main.css') !!}">
 </head>
 <body class="home landingpage">
+	<div class="admin-dashboard clearfix">
+		@include('user.include.portal.header')
+		@include('user.include.portal.sidebar')
 		@yield('content')
 		<script type="text/javascript" src="{!! asset('js/main.js') !!}"></script>
 		@yield('script')

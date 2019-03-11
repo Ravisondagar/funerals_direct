@@ -146,4 +146,18 @@ class UsersController extends Controller
     {
         return view('user.account-settings');
     }
+
+    public function login()
+    {
+        return view('user.login');
+    }    
+
+    //Login check details
+    public function post_login(Request $request){
+        if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password'),'role' => "member",'active'=>1])) {
+               return redirect()->route('users.setting');         
+        }
+        
+        return redirect()->route('users.login')->with('message', 'enter valid details ');;
+    }   
 }

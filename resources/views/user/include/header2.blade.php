@@ -53,9 +53,11 @@
 								<li>
 									<a href="#">Contact Us</a>
 								</li>
+								@if(!Auth::check())
 								<li class="login-links">
-									<a href="#">Login</a>   /  <a href="{!! route('users.register') !!}">Register</a>
+									<a href="{!! route('users.login') !!}">Login</a>   /  <a href="{!! route('users.register') !!}">Register</a>
 								</li>
+								@endif
 							</ul>
 						</div>
 					</div>
