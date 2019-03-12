@@ -77,7 +77,7 @@
 											</button>
 											<ul class="dropdown-menu">
 												<li><a href="{!! route('funeral.setting',$funeral_home->id) !!}">Settings</a></li>
-												<li><a href="#" data-toggle="modal" data-target="#rename-funeral-home">Rename</a></li>
+												<li><a data-href="{!! route('funeral-home.update',$funeral_home->id) !!}" id="rename" data-toggle="modal" data-target="#rename-funeral-home">Rename</a></li>
 												<li><a href="#" data-toggle="modal" data-target="#publish-funeral-home">Publish</a></li>
 												<li class="active"><a href="#" data-toggle="modal" data-target="#unpublish-funeral-home">Unpublish</a></li>
 												<li><a href="#" data-toggle="modal" data-target="#duplicate-funeral-home">Duplicate</a></li>
@@ -275,4 +275,12 @@
 			</div>
 		</div>
 	</div>
+@endsection
+@section('script')
+<script type="text/javascript">
+	$('#rename').click(function(){
+		alert($(this).data('href'));
+	});
+	
+</script>
 @endsection

@@ -102,7 +102,7 @@ class FuneralHomesController extends Controller
      * @param  \App\FuneralHome  $funeralHome
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FuneralHome $funeralHome)
+    public function update(Request $request, $id)
     {
         //
     }
