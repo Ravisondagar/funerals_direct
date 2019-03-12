@@ -11,8 +11,16 @@
 		@include('user.include.portal.header')
 		@include('user.include.portal.sidebar')
 		@yield('content')
+
 		<script type="text/javascript" src="{!! asset('js/main.js') !!}"></script>
 		@yield('script')
-
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#logout').click(function(e){
+					e.preventDefault(this);
+					$('#form').submit();
+				});
+			});
+		</script>
 </body>
 </html>

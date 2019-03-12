@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers\Portal;
 
-use App\FuneralHome;
 use App\FuneralHomeProfile;
 use Illuminate\Http\Request;
-use Former;
-use Auth;
-use Validator;
 
-class FuneralHomesController extends Controller
+class FuneralHomeProfilesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +14,7 @@ class FuneralHomesController extends Controller
      */
     public function index()
     {
-        $funeral_homes = FuneralHome::all();
-        return view('user.my-funeral-home',compact('funeral_homes'));
+        //
     }
 
     /**
@@ -40,7 +35,7 @@ class FuneralHomesController extends Controller
      */
     public function store(Request $request)
     {
-        //Rules for validation
+        /*//Rules for validation
         $rules=[
           'name' => 'required',
         ];
@@ -56,16 +51,28 @@ class FuneralHomesController extends Controller
         if ($validator->fails()) { 
           //Former::withErrors($validator);
           return redirect()->back()->withErrors($validator)->withInput();
-        }
+        }*/
         // If no error than go inside otherwise go to the catch section
         /*try
         {*/
-          $funeral_home = New FuneralHome;
-          $funeral_home->user_id = Auth::user()->id;
-          $funeral_home->name = $request->get('name');
-          $funeral_home->save();
 
-          return redirect()->route('funeral-home.index')->withSuccess("Insert record successfully.");
+          $funeral_home_profile = New FuneralHomeProfile;
+          $funeral_home_profile->funeral_home_id = $request->get('id');
+          $funeral_home_profile->business_logo = $request->get('business_logo');
+          $funeral_home_profile->phone = $request->get('phone');
+          $funeral_home_profile->phone_code = $request->get('phone_code');
+          $funeral_home_profile->free_code = $request->get('free_code');
+          $funeral_home_profile->free_phone = $request->get('free_phone');
+          $funeral_home_profile->mobile = $request->get('mobile');
+          $funeral_home_profile->address1 = $request->get('address1');
+          $funeral_home_profile->address2 = $request->get('address2');
+          $funeral_home_profile->website = $request->get('website');
+          $funeral_home_profile->about = $request->get('about');
+          $funeral_home_profile->videourl = $request->get('videourl');
+
+          $funeral_home_profile->save();
+
+          return redirect()->route('funeral.setting',$request->get('id'))->withSuccess("Insert record successfully.");
         /*}
         catch(\Exception $e)
         {
@@ -76,10 +83,10 @@ class FuneralHomesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\FuneralHome  $funeralHome
+     * @param  \App\FuneralHomeProfile  $funeralHomeProfile
      * @return \Illuminate\Http\Response
      */
-    public function show(FuneralHome $funeralHome)
+    public function show(FuneralHomeProfile $funeralHomeProfile)
     {
         //
     }
@@ -87,10 +94,10 @@ class FuneralHomesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\FuneralHome  $funeralHome
+     * @param  \App\FuneralHomeProfile  $funeralHomeProfile
      * @return \Illuminate\Http\Response
      */
-    public function edit(FuneralHome $funeralHome)
+    public function edit(FuneralHomeProfile $funeralHomeProfile)
     {
         //
     }
@@ -99,28 +106,24 @@ class FuneralHomesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\FuneralHome  $funeralHome
+     * @param  \App\FuneralHomeProfile  $funeralHomeProfile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FuneralHome $funeralHome)
+    public function update(Request $request, $id)
     {
-        //
+        $funeral_home_profile = FuneralHomeProfile::find($id);
+        $funeral_home_profile->update($request->all());
+        return redirect()->route('funeral.setting',$request->get('id'))->withSuccess("Update record successfully.");
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\FuneralHome  $funeralHome
+     * @param  \App\FuneralHomeProfile  $funeralHomeProfile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FuneralHome $funeralHome)
+    public function destroy(FuneralHomeProfile $funeralHomeProfile)
     {
         //
-    }
-
-    public function setting($id)
-    {
-        $funral_profile = FuneralHome::find($id);
-        return view('user.about-us2',compact('id','funral_profile'));
     }
 }

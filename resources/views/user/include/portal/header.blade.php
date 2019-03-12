@@ -19,7 +19,10 @@
 									<a href="index.php">Go to Website</a>
 								</li>
 								<li>
-									<a href="#">Logout</a>
+									<form method="post" id="form" action="{{ route('userlogout') }}">
+									@csrf
+									<a href="javascript:;" id="logout">Logout</a>
+								</form>
 								</li>
 							</ul>
 						</div>

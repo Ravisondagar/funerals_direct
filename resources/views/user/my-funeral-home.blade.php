@@ -52,14 +52,15 @@
 									<th>Status</th>
 									<th>Actions</th>
 								</tr>
+								@foreach($funeral_homes as $funeral_home)
 								<tr>
-									<td data-th="My Funeral Homes"><i>No funeral homes have been added yet.</i></td>
+									<td data-th="My Funeral Homes"><i>{!! $funeral_home->name !!}</i></td>
 									<td data-th="*Region"><div class="text-center"><i class="fa fa-times-circle circle-close"></i></div></td>
 									<td data-th="*About Us"><div class="text-center"><i class="fa fa-times-circle circle-close"></i></div></td>
 									<td data-th="*3 Packages"><div class="text-center"><i class="fa fa-times-circle circle-close"></i></div></td>
 									<td data-th="Status"><div class="text-center"><i class="fa fa-times-circle circle-close"></i> Offline</div></td>
 									<td data-th="Actions" class="relative">
-										<div class="popup-tooltip right">
+										{{-- <div class="popup-tooltip right">
 											<a href="javascript:;" class="close-icon"><i class="fa fa-times"></i></a>
 											<div class="popup-tooltip-text">
 												<h3>To edit your funeral home select “Settings”</h3>
@@ -69,13 +70,13 @@
 													<label for="remember1">Don’t show me this again.</label>
 												</div>
 											</div>
-										</div>
+										</div> --}}
 										<div class="btn-group table-dropdown">
 											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												Choose Action <span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu">
-												<li><a href="#">Settings</a></li>
+												<li><a href="{!! route('funeral.setting',$funeral_home->id) !!}">Settings</a></li>
 												<li><a href="#" data-toggle="modal" data-target="#rename-funeral-home">Rename</a></li>
 												<li><a href="#" data-toggle="modal" data-target="#publish-funeral-home">Publish</a></li>
 												<li class="active"><a href="#" data-toggle="modal" data-target="#unpublish-funeral-home">Unpublish</a></li>
@@ -85,28 +86,7 @@
 										</div>
 									</td>
 								</tr>
-								<tr>
-									<td data-th="My Funeral Homes"><i>No funeral homes have been added yet.</i></td>
-									<td data-th="*Region"><div class="text-center"><i class="fa fa-times-circle circle-close"></i></div></td>
-									<td data-th="*About Us"><div class="text-center"><i class="fa fa-times-circle circle-close"></i></div></td>
-									<td data-th="*3 Packages"><div class="text-center"><i class="fa fa-times-circle circle-close"></i></div></td>
-									<td data-th="Status"><div class="text-center"><i class="fa fa-times-circle circle-close"></i> Offline</div></td>
-									<td data-th="Actions" class="relative">
-										<div class="btn-group table-dropdown">
-											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-												Choose Action <span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu">
-												<li><a href="#">Settings</a></li>
-												<li><a href="#">Rename</a></li>
-												<li><a href="#">Publish</a></li>
-												<li class="active"><a href="#">Unpublish</a></li>
-												<li><a href="#">Duplicate</a></li>
-												<li><a href="#">Delete</a></li>
-											</ul>
-										</div>
-									</td>
-								</tr>
+								@endforeach
 							</table>
 						</div>
 					</div>
@@ -121,10 +101,11 @@
 			<div class="modal-content">
 				<div class="modal-body">
 					<p>Give your package a name and then press the “Save” button.</p>
-					<form >
+					<form method="post" action="{!! route('funeral-home.store') !!}">
+						@csrf
 						<div class="funeral-home-popup-form">
 							<div class="form-group">
-								<input type="email" class="form-control" placeholder="Joe Bloggs & Co Hawkes Bay">
+								<input type="text" class="form-control" placeholder="Joe Bloggs & Co Hawkes Bay" name="name">
 							</div>
 						</div>
 						<div class="add-btn text-right">

@@ -71,9 +71,11 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->update($request->all());
+        return redirect()->back()->withSuccess("Profile Update.");
     }
 
     /**
@@ -85,6 +87,12 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout(); 
+        return redirect('/dashboard');
     }
 
     public function register()
@@ -144,7 +152,8 @@ class UsersController extends Controller
 
     public function setting()
     {
-        return view('user.account-settings');
+        $user = User::find(Auth::user()->id);
+        return view('user.account-settings',compact('user'));
     }
 
     public function login()
