@@ -46,8 +46,12 @@ Route::group(['middleware'=>['auth'],'prefix'=>'admin','namespace'=>'Admin',], f
 Route::group(['middleware'=>['auth'],'prefix'=>'portal','namespace'=>'Portal',], function(){
 
 	Route::resource('funeral-home','FuneralHomesController');
+	Route::post('funeral-home-publish','FuneralHomesController@publish')->name('funeral-home.publish');
+	Route::post('funeral-home-unpublish','FuneralHomesController@unpublish')->name('funeral-home.unpublish');
+	Route::post('funeral-home-delete','FuneralHomesController@delete')->name('funeral-home.delete');
 	Route::resource('funeral-home-profile','FuneralHomeProfilesController');
 	Route::get('funeral-setting/{id}','FuneralHomesController@setting')->name('funeral.setting');
+
 
 
 });

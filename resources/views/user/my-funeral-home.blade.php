@@ -77,11 +77,11 @@
 											</button>
 											<ul class="dropdown-menu">
 												<li><a href="{!! route('funeral.setting',$funeral_home->id) !!}">Settings</a></li>
-												<li><a data-href="{!! route('funeral-home.update',$funeral_home->id) !!}" id="rename" data-toggle="modal" data-target="#rename-funeral-home">Rename</a></li>
-												<li><a href="#" data-toggle="modal" data-target="#publish-funeral-home">Publish</a></li>
-												<li class="active"><a href="#" data-toggle="modal" data-target="#unpublish-funeral-home">Unpublish</a></li>
+												<li><a data-href="{!! route('funeral-home.edit',$funeral_home->id) !!}" class="rename" data-toggle="modal" data-target="#rename-funeral-home">Rename</a></li>
+												<li><a href="#" data-toggle="modal" data-target="#publish-funeral-home" class="publish" data-id="{!! $funeral_home->id !!}">Publish</a></li>
+												<li class="active"><a href="#" data-toggle="modal" data-target="#unpublish-funeral-home" class="unpublish" data-id="{!! $funeral_home->id !!}">Unpublish</a></li>
 												<li><a href="#" data-toggle="modal" data-target="#duplicate-funeral-home">Duplicate</a></li>
-												<li><a href="#" data-toggle="modal" data-target="#delete-funeral-home">Delete</a></li>
+												<li><a href="#" data-toggle="modal" data-target="#delete-funeral-home" class="delete" data-id="{!! $funeral_home->id !!}">Delete</a></li>
 											</ul>
 										</div>
 									</td>
@@ -122,26 +122,7 @@
 
 	<!-- rename-funeral-home -->
 	<div class="modal fade funeral-home-popup" id="rename-funeral-home" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-body">
-					<p>What would you like to rename your funeral home to? Type in field below:</p>
-					<form class="funeral-home-popup-form">
-						<div class="form-group">
-							<input type="email" class="form-control" value="Bloggs Funerals Hawkes Bay">
-						</div>
-					</form>
-					<div class="add-btn text-right">
-						<a href="#" class="green add-btn-link">
-							Rename
-						</a>
-						<a href="javascript:;" class="pink-orange add-btn-link" data-dismiss="modal">
-							Cancel
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 	</div>
 
 	<!-- publish-funeral-home -->
@@ -151,11 +132,17 @@
 				<div class="modal-body">
 					<p>It seems that this funeral home has not met all the 3 requirements in order to be published.</p>
 					<p>Once you have met these requirements please come back and try again.</p>
+					<form method="post" action="{!! route('funeral-home.publish') !!}">
+					@csrf
+						
+						<input type="hidden" name="id" id="p">
 					<div class="add-btn text-center">
+						<input type="submit" name="submit" value="Publish" class="blue add-btn-link">
 						<a href="javascript:;" class="blue add-btn-link" data-dismiss="modal">
 							Cancel
 						</a>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -171,14 +158,17 @@
 						<li><em>*</em> This will mean that everything connected to this funeral home will no longer show on our website.</li>
 						<li><em>*</em> Note that all information will still be in place but it just won’t be live on our website.</li>
 					</ul>
+					<form method="post" action="{!! route('funeral-home.unpublish') !!}">
+					@csrf
+						
+						<input type="hidden" name="id" id="u">
 					<div class="add-btn text-right">
-						<a href="#" class="green add-btn-link">
-							Yes, take offline
-						</a>
+						<input type="submit" name="submit" value="Yes, take offline" class="green add-btn-link">
 						<a href="javascript:;" class="pink-orange add-btn-link" data-dismiss="modal">
 							No, don’t take offline
 						</a>
 					</div>
+				</form>
 				</div>
 			</div>
 		</div>
@@ -263,14 +253,17 @@
 						<li class="red"><em>*</em> This will mean that everything connected to this funeral home will be gone forever.</li>
 					</ul>
 					<p><strong>How do you want to proceed?</strong></p>
+					<form method="post" action="{!! route('funeral-home.delete') !!}">
+					@csrf
+						
+						<input type="hidden" name="id" id="d">
 					<div class="add-btn text-center">
-						<a href="#" class="green add-btn-link">
-							Yes, delete forever
-						</a>
+						<input type="submit" name="submit" value="Yes, delete forever" class="green add-btn-link">
 						<a href="javascript:;" class="pink-orange add-btn-link" data-dismiss="modal">
 							No, don’t delete
 						</a>
 					</div>
+				</form>
 				</div>
 			</div>
 		</div>
@@ -278,8 +271,27 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-	$('#rename').click(function(){
-		alert($(this).data('href'));
+	$('.publish').click(function(){
+		$('#p').val($(this).data('id'));
+	});
+	$('.unpublish').click(function(){
+		$('#u').val($(this).data('id'));
+	});
+	$('.delete').click(function(){
+		$('#d').val($(this).data('id'));
+	});
+	$('.rename').click(function(){
+		var url = $(this).data('href');
+		alert(url);
+		$.ajax({
+			type:'get',
+			url:url,
+			success :function(data){
+				$('#rename-funeral-home').html(data);
+				$('#rename-funeral-home').modal('show');
+			}
+
+		});
 	});
 	
 </script>

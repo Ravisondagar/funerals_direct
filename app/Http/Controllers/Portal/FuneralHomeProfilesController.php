@@ -55,7 +55,7 @@ class FuneralHomeProfilesController extends Controller
         // If no error than go inside otherwise go to the catch section
         /*try
         {*/
-
+            dd($request->get('image'));
           $funeral_home_profile = New FuneralHomeProfile;
           $funeral_home_profile->funeral_home_id = $request->get('id');
           $funeral_home_profile->business_logo = $request->get('business_logo');
@@ -111,6 +111,7 @@ class FuneralHomeProfilesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request->get('image'));
         $funeral_home_profile = FuneralHomeProfile::find($id);
         $funeral_home_profile->update($request->all());
         return redirect()->route('funeral.setting',$request->get('id'))->withSuccess("Update record successfully.");

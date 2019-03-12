@@ -33,7 +33,7 @@ class CreateFuneralHomeProfilesTable extends Migration
             $table->text('address1')->nullable();
             $table->text('address2')->nullable();
             $table->text('city')->nullable();
-            $table->unsignedBigInteger('district_id')->unsigned();
+            $table->unsignedBigInteger('district_id')->unsigned()->nullable();
             $table->foreign('district_id')->references('id')->on('locations')->onDelete('cascade');
             $table->text('about')->nullable();
             $table->string('videourl')->nullable();

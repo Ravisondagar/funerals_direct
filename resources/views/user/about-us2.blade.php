@@ -199,9 +199,13 @@
 															<div class="right">
 																<div class="form-group">
 																	<div class="add-btn">
-																		<a href="#" class="green add-btn-link">
-																			Upload Photos
-																		</a>
+																		<div id="container">
+																			<a href="javascript:;" class="green add-btn-link" id="gallery">
+																				Upload Photos
+																			</a>
+																			
+																		</div>
+																		<input type="hidden" name="image[]" id="gallery_upload">
 																	</div>
 																	<ul class="f_16">
 																		<li>* Photo dimensions:</li>
@@ -370,5 +374,76 @@
   });
    
   uploader.init();
+
+  var uploader1 = new plupload.Uploader({
+      runtimes : 'html5,flash,silverlight,html4',
+       
+      browse_button : 'gallery', // you can pass in id...
+      container: document.getElementById('container'), // ... or DOM Element itself
+       
+      url : "{{ asset('plupload/upload.php') }}",
+
+      filters : {
+          max_file_size : '10mb',
+           multipart : true,
+          mime_types: [
+              {title : "Image files", extensions : "jpg,gif,png"},
+              {title : "Zip files", extensions : "zip"}
+          ]
+      },
+   
+      // Flash settings
+      flash_swf_url : "{{ asset('plupload/Moxie.swf') }}",
+   
+      // Silverlight settings
+      silverlight_xap_url : "{{ asset('plupload/Moxie.xap') }}",
+       
+   
+      init: {
+          PostInit: function() {
+              //document.getElementById('filelist').innerHTML = '';
+          },
+   
+          FilesAdded: function(up, files) {
+              
+              uploader1.start();
+          },
+   
+          // UploadProgress: function(up, file) {
+          //     document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+          // },
+          UploadFile: function(up, file){
+                          $('#gallery_upload').val(file.name);
+                      var tmp_url = '{!! asset('/tmp/') !!}';
+                      console.log(file);
+                      
+                          /*$('#img').remove();
+                          $('.business_logo').append("<img src='"+tmp_url +"/"+ file.name+"' id='img' height='205px' width='371px'/>");*/
+                          
+
+                          /*$('#preview').val(file.name);
+                          $('#previewDiv >img').remove();
+                          $('#previewDiv').append("<img src='"+tmp_url +"/"+ file.name+"' id='preview' height='100px' width='100px'/>");*/
+                      
+                  },
+          UploadComplete: function(up, files){
+            
+                  var tmp_url = '{!! asset('/tmp/') !!}';
+                  console.log(files);
+                  plupload.each(files, function(file) {
+                      $('#image').val(file.name);
+                      $('#previewDiv > img').remove();
+                      $('#previewDiv').append("<img src='"+"/tmp/"+ file.name+"' id='preview' height='100px' width='100px'/>");
+                  });
+                  jQuery('.loader').fadeToggle('medium');
+          },
+   
+          Error: function(up, err) {
+              document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+          }
+      }
+  });
+   
+  uploader1.init();
 </script>
 @endsection

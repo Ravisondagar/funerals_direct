@@ -63,6 +63,7 @@ class FuneralHomesController extends Controller
           $funeral_home = New FuneralHome;
           $funeral_home->user_id = Auth::user()->id;
           $funeral_home->name = $request->get('name');
+          $funeral_home->publish = 0;
           $funeral_home->save();
 
           return redirect()->route('funeral-home.index')->withSuccess("Insert record successfully.");
@@ -90,9 +91,11 @@ class FuneralHomesController extends Controller
      * @param  \App\FuneralHome  $funeralHome
      * @return \Illuminate\Http\Response
      */
-    public function edit(FuneralHome $funeralHome)
+    public function edit($id)
     {
-        //
+        $funeral_home = FuneralHome::find($id);
+        return view('user.render.render_reneme_name',compact('funeral_home'));
+
     }
 
     /**
@@ -104,7 +107,9 @@ class FuneralHomesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $funeral_home = FuneralHome::find($id);
+        $funeral_home->update($request->all());
+        return redirect()->route('funeral-home.index')->withSuccess("Update record successfully.");
     }
 
     /**
@@ -122,5 +127,28 @@ class FuneralHomesController extends Controller
     {
         $funral_profile = FuneralHome::find($id);
         return view('user.about-us2',compact('id','funral_profile'));
+    }
+
+    public function publish(Request $request)
+    {
+         $funeral_home = FuneralHome::find($request->get('id'));
+         $funeral_home->publish = 1;
+         $funeral_home->update();
+         return redirect()->route('funeral-home.index')->withSuccess("Update record successfully.");
+    }
+
+    public function unpublish(Request $request)
+    {
+         $funeral_home = FuneralHome::find($request->get('id'));
+         $funeral_home->publish = 0;
+         $funeral_home->update();
+         return redirect()->route('funeral-home.index')->withSuccess("Update record successfully.");
+    }
+
+    public function delete(Request $request)
+    {
+         $funeral_home = FuneralHome::find($request->get('id'));
+         $funeral_home->delete();
+         return redirect()->route('funeral-home.index')->withSuccess("Update record successfully.");
     }
 }
