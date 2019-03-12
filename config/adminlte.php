@@ -138,6 +138,11 @@ return [
             'icon' => 'user',
         ],
         [
+            'text' => 'Blogs',
+            'url'  => 'admin/blogs',
+            'icon' => 'user',
+        ],
+        [
             'text' => 'Ranges',
             'url'  => 'admin/ranges',
             'icon' => 'user',
@@ -155,6 +160,11 @@ return [
         [
             'text' => 'Advertisements',
             'url'  => 'admin/advertisements',
+            'icon' => 'user',
+        ],
+        [
+            'text' => 'Locations',
+            'url'  => 'admin/locations',
             'icon' => 'user',
         ],
         [

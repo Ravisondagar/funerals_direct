@@ -33,10 +33,12 @@ Route::group(['middleware'=>['auth'],'prefix'=>'admin','namespace'=>'Admin',], f
 
 	Route::resource('categories','CategoriesController');
 	Route::resource('blog-categories','BlogCategoriesController');
+	Route::resource('blogs','BlogsController');
 	Route::resource('ranges','RangesController');
 	Route::resource('extras','ExtrasController');
 	Route::resource('authors','AuthorsController');
 	Route::resource('advertisements','AdvertisementsController');
+	Route::resource('locations','LocationsController');
 
 });
 

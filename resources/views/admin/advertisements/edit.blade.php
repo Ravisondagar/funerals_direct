@@ -1,47 +1,42 @@
 @extends('adminlte::page')
-@section('title', 'Edit Author')
+@section('title', 'Edit Advertisement')
 @section('content')
   <div class="box box-primary">
     <div class="box-header with-border">
-      <h3 class="box-title">Edit Author</h3>
-      <a href="{!! route('authors.index') !!}" class="btn btn-primary pull-right" >Back</a>
+      <h3 class="box-title">Edit Advertisement</h3>
+      <a href="{!! route('advertisements.index') !!}" class="btn btn-primary pull-right" >Back</a>
     </div>
     <!-- /.box-header -->
     <!-- form start -->
-    <form role="form" method="post" action="{!! route('authors.update',$author->id) !!}">
+    <form role="form" method="post" action="{!! route('advertisements.update',$advertisement->id) !!}">
     @csrf
     @method('PATCH')
       <div class="box-body">
         <div class="form-group">
-          <label for="exampleInputEmail1">Name</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Author Name" name="name" value="{!! $author->name !!}">
-          @if($errors->has('name'))<span>{!! $errors->first('name') !!}</span>@endif
+          <label for="exampleInputEmail1">Text</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Advertisement Name" name="text" value="{!! $advertisement->text !!}">
+          @if($errors->has('text'))<span>{!! $errors->first('text') !!}</span>@endif
         </div>
         <div class="form-group">
-          <label for="exampleInputEmail1">Description</label>
-          <textarea class="form-control" placeholder="Enter Description" name="description">{!! $author->description !!}</textarea>
-          @if($errors->has('description'))<span>{!! $errors->first('description') !!}</span>@endif
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Designation</label>
-          <textarea class="form-control" placeholder="Enter Designation" name="designation">{!! $author->designation !!}</textarea>
-          @if($errors->has('designation'))<span>{!! $errors->first('designation') !!}</span>@endif
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Website</label>
-          <input type="text" class="form-control" placeholder="Enter Website" name="website" value="{!! $author->website !!}">
-          @if($errors->has('website'))<span>{!! $errors->first('website') !!}</span>@endif
+          <label for="exampleInputEmail1">Link</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Advertisement Name" name="link" value="{!! $advertisement->link !!}">
+          @if($errors->has('link'))<span>{!! $errors->first('link') !!}</span>@endif
         </div>
         <div class="form-group">
           <div id="container">
           <label>Image</label>
           <div id="previewDiv">
-            <img id="img" src="{!! asset($author->image_url()) !!}" style="height: 100px;width: 100px">
+            <img id="img" src="{!! asset($advertisement->image_url()) !!}" style="height: 100px;width: 100px">
           </div>
           <a href="javascript:;" class="btn btn-primary" id="uploader">Upload Image</a>
           @if($errors->has('image'))<p class="help-block">{!! $errors->first('image') !!}</p>@endif
           </div>
           <input type="hidden" name="image" id="image">
+        </div>
+        <div class="form-group">
+          <label>Active</label>
+          <input type="hidden" name="active" value="0">
+          <input type="checkbox" name="active" value="1" @if($advertisement->active == '1') checked @endif>
         </div>
       </div>
       <!-- /.box-body -->
@@ -53,8 +48,6 @@
   </div>
 @stop
 @section('js')
-<script src="{!! asset('unisharp/laravel-ckeditor/ckeditor.js') !!}"></script>
-<script src="{!! asset('unisharp/laravel-ckeditor/adapters/jquery.js') !!}"></script>
 <script src="{!! asset('js/plupload.full.min.js') !!}"></script>
 <script type="text/javascript">
   var uploader = new plupload.Uploader({
@@ -126,7 +119,5 @@
   });
    
   uploader.init();
-
-  $('textarea').ckeditor();
 </script>
 @stop

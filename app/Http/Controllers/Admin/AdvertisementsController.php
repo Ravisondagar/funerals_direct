@@ -110,14 +110,13 @@ class AdvertisementsController extends Controller
     {
         //Rules for validation
         $rules=[
-          'name' => 'required',
-          'description' => 'required',
-          'designation' => 'required',
+          'text' => 'required',
+          'link' => 'required',
         ];
 
         // Messages for validation
         $messages=[
-          'name.required' => 'Please enter first name.',
+          'text.required' => 'Please enter Text.',
         ];
         
         // Make validator with rules and messages
