@@ -282,7 +282,6 @@
 	});
 	$('.rename').click(function(){
 		var url = $(this).data('href');
-		alert(url);
 		$.ajax({
 			type:'get',
 			url:url,

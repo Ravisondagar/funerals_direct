@@ -51,4 +51,9 @@ class FuneralHomeProfile extends Model
         else
             return asset('images/graduate.png');
     }
+
+    public function funeral_home_galleries()
+    {
+         return $this->hasMany('App\FuneralHomeGallery');
+    }
 }

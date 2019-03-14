@@ -205,7 +205,7 @@
 																			</a>
 																			
 																		</div>
-																		<input type="hidden" name="image[]" id="gallery_upload">
+																		<input type="hidden" name="image" id="gallery_upload">
 																	</div>
 																	<ul class="f_16">
 																		<li>* Photo dimensions:</li>
@@ -247,6 +247,7 @@
 											</div>
 											<div class="gallery-about">
 												<ul class="row clearfix" id="sortable">
+													{{-- @foreach($funral_profile->funeral_home_profile->funeral_home_galleries as $gallery) --}}
 													<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
 														<a href="{!! asset('images/about-gallery-img-popup1.jpg') !!}" rel="author">
 															<img src="{!! asset('images/about-gallery-img1.jpg') !!}" alt="">
@@ -413,9 +414,9 @@
           //     document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
           // },
           UploadFile: function(up, file){
-                          $('#gallery_upload').val(file.name);
                       var tmp_url = '{!! asset('/tmp/') !!}';
                       console.log(file);
+                          document.getElementById('gallery_upload').value +=file.name+",";
                       
                           /*$('#img').remove();
                           $('.business_logo').append("<img src='"+tmp_url +"/"+ file.name+"' id='img' height='205px' width='371px'/>");*/

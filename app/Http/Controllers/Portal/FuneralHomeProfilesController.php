@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Portal;
 
 use App\FuneralHomeProfile;
+use App\FuneralHomeGallery;
 use Illuminate\Http\Request;
 
 class FuneralHomeProfilesController extends Controller
@@ -111,9 +112,16 @@ class FuneralHomeProfilesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->get('image'));
         $funeral_home_profile = FuneralHomeProfile::find($id);
         $funeral_home_profile->update($request->all());
+        $gallerys = explode(',', $request->get('image'));
+        $count = count($gallerys);
+        for ($i=0; $i < $count - 1; $i++) { 
+            $funeral_home_gallery = new FuneralHomeGallery;
+            $funeral_home_gallery->funeral_home_id = $id;
+            $funeral_home_gallery->image = $gallerys[$i];
+            $funeral_home_gallery->save();
+        }
         return redirect()->route('funeral.setting',$request->get('id'))->withSuccess("Update record successfully.");
     }
 
