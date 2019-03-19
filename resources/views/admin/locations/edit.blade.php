@@ -12,15 +12,16 @@
     @csrf
     @method('PATCH')
       <div class="box-body">
-        {{-- <div class="form-group">
+        <div class="form-group">
           <label for="exampleInputEmail1">Location Category</label>
-            <select class="form-control select2" data-placeholder="Select a State"  name="blog_category_id">
-              @foreach($blog_categories as $blog_category => $key)
-                <option value="{!! $key !!}">{!! $blog_category !!}</option>
+            <select class="form-control select2" data-placeholder="Select a State"  name="parent_id">
+              <option value="">Select Location</option>
+              @foreach($locations as $location1 => $key)
+                <option value="{!! $key !!}">{!! $location1 !!}</option>
               @endforeach
             </select>
-          @if($errors->has('title'))<span>{!! $errors->first('title') !!}</span>@endif
-        </div> --}}
+          @if($errors->has('parent_id'))<span>{!! $errors->first('parent_id') !!}</span>@endif
+        </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Title</label>
           <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Location Title" name="title" value="{!! $location->title !!}">

@@ -151,4 +151,34 @@ class FuneralHomesController extends Controller
          $funeral_home->delete();
          return redirect()->route('funeral-home.index')->withSuccess("Update record successfully.");
     }
+
+    public function duplicate(Request $request)
+    {
+        $funeral_home = New FuneralHome;
+        $funeral_home->user_id = Auth::user()->id;
+        $funeral_home->name = $request->get('name');
+        $funeral_home->publish = 0;
+        $funeral_home->save();
+
+        $funeral_home_original = FuneralHome::find($request->get('id'));
+        $funeral_home_profile = New FuneralHomeProfile;
+        $funeral_home_profile->funeral_home_id = $funeral_home->id;
+        $funeral_home_profile->business_logo = $funeral_home_original->funeral_home_profile->business_logo;
+        $funeral_home_profile->phone = $funeral_home_original->funeral_home_profile->phone;
+        $funeral_home_profile->phone_code = $funeral_home_original->funeral_home_profile->phone_code;
+        $funeral_home_profile->free_code = $funeral_home_original->funeral_home_profile->free_code;
+        $funeral_home_profile->free_phone = $funeral_home_original->funeral_home_profile->free_phone;
+        $funeral_home_profile->mobile = $funeral_home_original->funeral_home_profile->mobile;
+        $funeral_home_profile->address1 = $funeral_home_original->funeral_home_profile->address1;
+        $funeral_home_profile->address2 = $funeral_home_original->funeral_home_profile->address2;
+        $funeral_home_profile->website = $funeral_home_original->funeral_home_profile->website;
+        $funeral_home_profile->about = $funeral_home_original->funeral_home_profile->about;
+        $funeral_home_profile->videourl = $funeral_home_original->funeral_home_profile->videourl;
+
+        $funeral_home_profile->save();
+         
+        return redirect()->route('funeral-home.index')->withSuccess("Update record successfully.");
+    }
+
+
 }

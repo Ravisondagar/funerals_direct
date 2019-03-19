@@ -51,4 +51,23 @@ class Location extends Model
         else
             return asset('images/graduate.png');
     }
+
+    public function country()
+    {
+        return Location::whereNull('parent_id')->get();
+    }
+
+    public function location()
+    {
+        return Location::whereNotNull('parent_id')->get();   
+    }
+
+    public function select_country($id)
+    {
+        return Location::where('parent_id', '=', $id)->get();
+    }
+
+    public function parent(){
+        return $this->belongsTo('App\Location','parent_id');
+    }
 }

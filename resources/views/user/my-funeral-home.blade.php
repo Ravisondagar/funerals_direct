@@ -58,7 +58,11 @@
 									<td data-th="*Region"><div class="text-center"><i class="fa fa-times-circle circle-close"></i></div></td>
 									<td data-th="*About Us"><div class="text-center"><i class="fa fa-times-circle circle-close"></i></div></td>
 									<td data-th="*3 Packages"><div class="text-center"><i class="fa fa-times-circle circle-close"></i></div></td>
-									<td data-th="Status"><div class="text-center"><i class="fa fa-times-circle circle-close"></i> Offline</div></td>
+									@if($funeral_home->publish == 1)
+										<td data-th="Status"><div class="text-center"><i class="fa fa-check-circle circle-check"></i> Online</div></td>
+									@else
+										<td data-th="Status"><div class="text-center"><i class="fa fa-times-circle circle-close"></i> Offline</div></td>
+									@endif
 									<td data-th="Actions" class="relative">
 										{{-- <div class="popup-tooltip right">
 											<a href="javascript:;" class="close-icon"><i class="fa fa-times"></i></a>
@@ -80,7 +84,7 @@
 												<li><a data-href="{!! route('funeral-home.edit',$funeral_home->id) !!}" class="rename" data-toggle="modal" data-target="#rename-funeral-home">Rename</a></li>
 												<li><a href="#" data-toggle="modal" data-target="#publish-funeral-home" class="publish" data-id="{!! $funeral_home->id !!}">Publish</a></li>
 												<li class="active"><a href="#" data-toggle="modal" data-target="#unpublish-funeral-home" class="unpublish" data-id="{!! $funeral_home->id !!}">Unpublish</a></li>
-												<li><a href="#" data-toggle="modal" data-target="#duplicate-funeral-home">Duplicate</a></li>
+												<li><a href="#" data-toggle="modal" data-target="#duplicate-funeral-home" data-id="{!! $funeral_home->id !!}" class="duplicate">Duplicate</a></li>
 												<li><a href="#" data-toggle="modal" data-target="#delete-funeral-home" class="delete" data-id="{!! $funeral_home->id !!}">Delete</a></li>
 											</ul>
 										</div>
@@ -179,11 +183,13 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-body">
-					<form class="funeral-home-popup-form">
+					<form class="funeral-home-popup-form" action="{!! route('funeral-home.duplicate') !!}" method="post">
+						@csrf
 						<p><strong>Type below the new funeral home name:</strong></p>
 						<div class="form-group">
-							<input type="email" class="form-control" placeholder="Type new funeral home name">
+							<input type="text" class="form-control" placeholder="Type new funeral home name" name="name">
 						</div>
+						<input type="hidden" name="id" id="du">
 						<p><strong>What would you like to duplicate, please select:</strong></p>
 						<ul class="clearfix">
 							<li>
@@ -229,15 +235,13 @@
 								</div>
 							</li>
 						</ul>
-					</form>
 					<div class="add-btn text-right">
-						<a href="#" class="blue add-btn-link">
-							Duplicate
-						</a>
+						<input type="submit" name="submit" value="Duplicate" class="blue add-btn-link">
 						<a href="javascript:;" class="pink-orange add-btn-link" data-dismiss="modal">
 							Cancel
 						</a>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -279,6 +283,9 @@
 	});
 	$('.delete').click(function(){
 		$('#d').val($(this).data('id'));
+	});
+	$('.duplicate').click(function(){
+		$('#du').val($(this).data('id'));
 	});
 	$('.rename').click(function(){
 		var url = $(this).data('href');

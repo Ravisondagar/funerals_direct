@@ -28,8 +28,8 @@ class LocationsController extends Controller
      */
     public function create()
     {
-        /*$blog_categories = BlogCategory::all()->pluck('id','name');*/
-        return view('Admin.locations.add');
+        $locations = Location::whereNull('parent_id')->get()->pluck('id','title');
+        return view('Admin.locations.add',compact('locations'));
     }
 
     /**
@@ -64,6 +64,7 @@ class LocationsController extends Controller
         {*/
           $location = New Location;
           $location->user_id = Auth::user()->id;
+          $location->parent_id = $request->get('parent_id');
           $location->title = $request->get('title');
           $location->description = $request->get('description');
           $location->image = $request->get('image');
@@ -99,8 +100,8 @@ class LocationsController extends Controller
     public function edit($id)
     {
         $location = Location::find($id);
-        /*$blog_categories = BlogCategory::all()->pluck('id','name');*/
-        return view('Admin.locations.edit');
+        $locations = Location::whereNull('parent_id')->get()->pluck('id','title');
+        return view('Admin.locations.edit',compact('location','locations'));
     }
 
     /**

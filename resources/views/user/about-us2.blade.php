@@ -10,16 +10,15 @@
 						<p><strong>Select from one of the options below and press ‘Show’.</strong></p>
 						<div class="note-step-dropdown">
 							<div class="region-select step-select">
-								<select class="form-control selectpicker">
-									<option><strong>STEP 3:</strong>  Burial Packages</option>
-									<option><strong>STEP 3:</strong>  Burial Packages</option>
-									<option><strong>STEP 3:</strong>  Burial Packages</option>
+								<select class="form-control selectpicker" id="setting">
+									<option value="{!! route('funeral-home.funeral-home-location.index',['id' => $id]) !!}"><strong>STEP 2:</strong>  Region</option>
+									<option value="abc"><strong>STEP 3:</strong>  Burial Packages</option>
+									<option value="xyz"><strong>STEP 3:</strong>  Burial Packages</option>
 								</select>
 							</div>
 							<div class="add-btn">
-								<a href="#" class="green add-btn-link">
-									Show
-								</a>
+								<button id="show" class="green add-btn-link">Show</button>
+								
 							</div>
 						</div>
 					</div>
@@ -306,6 +305,11 @@
 @section('script')
 <script src="{!! asset('js/plupload.full.min.js') !!}"></script>
 <script type="text/javascript">
+	$('#show').click(function(){
+		alert($('#setting').val());
+		window.location.replace($('#setting').val());
+
+	});
   var uploader = new plupload.Uploader({
       runtimes : 'html5,flash,silverlight,html4',
        
