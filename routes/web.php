@@ -53,7 +53,7 @@ Route::group(['middleware'=>['auth'],'prefix'=>'portal','namespace'=>'Portal',],
 	Route::resource('funeral-home-profile','FuneralHomeProfilesController');
 	Route::get('funeral-setting/{id}','FuneralHomesController@setting')->name('funeral.setting');
 	Route::resource('funeral-home.funeral-home-location','FunerelHomeLocationsController');
-
+	Route::post('country','FunerelHomeLocationsController@select_country')->name('country');
 
 
 });

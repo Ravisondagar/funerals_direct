@@ -87,8 +87,9 @@ class FunerelHomeLocationsController extends Controller
         //
     }
 
-    public function select_country($id)
+    public function select_country(Request $request)
     {
-        return Location::where('parent_id', '=', $id)->get();
+        $locations = Location::where('parent_id', '=', $request->get('id'))->get();
+        return view('user.render.country',compact('locations'));
     }
 }

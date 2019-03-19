@@ -80,7 +80,7 @@
 												Select the districts you will be servicing
 											</div>
 											<div class="region-list-check">
-												<ul>
+												<ul id="location">
 													@foreach($locations as $location)
 													<li>
 														<div class="checkbox-btn">
@@ -192,12 +192,18 @@
 @section('script')
 <script type="text/javascript">
 	$('#parent').change(function(){
-		alert($(this).val());
 		var id = $(this).val();
+		var v_token = "{!! csrf_token() !!}";
 
 		$.ajax({
-			type:'get',
-			url:'portal/'
+			type:'post',
+			url:"{!! route('country') !!}",
+			data:{'id':id, _token: v_token},
+			success : function(data){
+				console.log(data);
+				$('#location').html(data);
+
+			}
 		});
 		
 	});
