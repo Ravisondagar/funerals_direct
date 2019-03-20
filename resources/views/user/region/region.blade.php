@@ -34,7 +34,7 @@
 							<div class="add-btn">
 								<ul>
 									<li class="relative">
-										<a href="#" class="green add-btn-link">
+										<a href="javascript:;" class="green add-btn-link" id="ad_region">
 											Add Region
 										</a>
 										{{-- <div class="popup-tooltip">
@@ -56,7 +56,7 @@
 							<p><em class="red">*</em> All regions and distrcts that you select will appear in the search results</p>
 							<div class="add-region-list">
 								<div class="row clearfix">
-									<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+									<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" class="clone">
 										<div class="add-region-box">
 											<div class="region-select step-select">
 												{{-- <div class="popup-tooltip right">
@@ -70,7 +70,7 @@
 														</div>
 													</div>
 												</div> --}}
-												<select class="form-control selectpicker" id="parent" title="Choose Region" name="location_id">
+												<select class="form-control selectpicker" class="parent" title="Choose Region" name="location_id">
 													@foreach($parents as $parent)
 														<option value="{!! $parent->id !!}">{!! $parent->title !!}</option>
 													@endforeach
@@ -191,7 +191,7 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-	$('#parent').change(function(){
+	$('.parent').change(function(){
 		var id = $(this).val();
 		var v_token = "{!! csrf_token() !!}";
 
@@ -202,10 +202,10 @@
 			success : function(data){
 				console.log(data);
 				$('#location').html(data);
-
 			}
 		});
-		
 	});
+
+
 </script>
 @endsection
